@@ -1,0 +1,24 @@
+Windows Registry Editor Version 5.00
+
+; --- REGISTER COMMANDS IN COMMANDSTORE ---
+; Up command
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CommandStore\shell\DockerUp]
+"MUIVerb"="Docker Compose Up -d"
+"Icon"="C:\\Program Files\\PowerShell\\7\\assets\\Powershell_av_colors.ico"
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CommandStore\shell\DockerUp\command]
+@="pwsh.exe -NoExit -Command \"Set-Location '%V'; docker compose up -d\""
+
+; Down command
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CommandStore\shell\DockerDown]
+"MUIVerb"="Docker Compose Down"
+"Icon"="C:\\Program Files\\PowerShell\\7\\assets\\Powershell_av_colors.ico"
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CommandStore\shell\DockerDown\command]
+@="pwsh.exe -NoExit -Command \"Set-Location '%V'; docker compose down\""
+
+; --- ADD SUBMENU TO FOLDER BACKGROUND ---
+[HKEY_CLASSES_ROOT\Directory\Background\shell\DockerCompose]
+"MUIVerb"="Docker Compose"
+"Icon"="C:\\Program Files\\Docker\\Docker\\frontend\\resources\\assets\\app\\icon.ico"
+"SubCommands"="DockerUp;DockerDown"
