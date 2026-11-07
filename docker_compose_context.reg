@@ -1,24 +1,89 @@
 Windows Registry Editor Version 5.00
 
-; --- REGISTER COMMANDS IN COMMANDSTORE ---
-; Up command
-[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CommandStore\shell\DockerUp]
-"MUIVerb"="Docker Compose Up -d"
-"Icon"="C:\\Program Files\\PowerShell\\7\\assets\\Powershell_av_colors.ico"
+; Docker Compose context submenu for Windows File Explorer.
+; Installs for the current user only (HKEY_CURRENT_USER): no admin rights needed.
+; Remove with uninstall.reg.
 
-[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CommandStore\shell\DockerUp\command]
-@="pwsh.exe -NoExit -Command \"Set-Location '%V'; docker compose up -d\""
-
-; Down command
-[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CommandStore\shell\DockerDown]
-"MUIVerb"="Docker Compose Down"
-"Icon"="C:\\Program Files\\PowerShell\\7\\assets\\Powershell_av_colors.ico"
-
-[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CommandStore\shell\DockerDown\command]
-@="pwsh.exe -NoExit -Command \"Set-Location '%V'; docker compose down\""
-
-; --- ADD SUBMENU TO FOLDER BACKGROUND ---
-[HKEY_CLASSES_ROOT\Directory\Background\shell\DockerCompose]
+; --- Right-click the empty space inside a folder ---
+[HKEY_CURRENT_USER\Software\Classes\Directory\Background\shell\DockerCompose]
 "MUIVerb"="Docker Compose"
-"Icon"="C:\\Program Files\\Docker\\Docker\\frontend\\resources\\assets\\app\\icon.ico"
-"SubCommands"="DockerUp;DockerDown"
+"Icon"="C:\\Program Files\\Docker\\Docker\\Docker Desktop.exe,0"
+"SubCommands"=""
+
+[HKEY_CURRENT_USER\Software\Classes\Directory\Background\shell\DockerCompose\shell\1up]
+"MUIVerb"="Up -d"
+"Icon"="C:\\Program Files\\PowerShell\\7\\pwsh.exe,0"
+
+[HKEY_CURRENT_USER\Software\Classes\Directory\Background\shell\DockerCompose\shell\1up\command]
+@="pwsh.exe -NoExit -WorkingDirectory \"%V\\.\" -Command \"docker compose up -d\""
+
+[HKEY_CURRENT_USER\Software\Classes\Directory\Background\shell\DockerCompose\shell\2pullup]
+"MUIVerb"="Pull && Up -d"
+"Icon"="C:\\Program Files\\PowerShell\\7\\pwsh.exe,0"
+
+[HKEY_CURRENT_USER\Software\Classes\Directory\Background\shell\DockerCompose\shell\2pullup\command]
+@="pwsh.exe -NoExit -WorkingDirectory \"%V\\.\" -Command \"docker compose pull; docker compose up -d\""
+
+[HKEY_CURRENT_USER\Software\Classes\Directory\Background\shell\DockerCompose\shell\3ps]
+"MUIVerb"="Status (ps)"
+"Icon"="C:\\Program Files\\PowerShell\\7\\pwsh.exe,0"
+
+[HKEY_CURRENT_USER\Software\Classes\Directory\Background\shell\DockerCompose\shell\3ps\command]
+@="pwsh.exe -NoExit -WorkingDirectory \"%V\\.\" -Command \"docker compose ps\""
+
+[HKEY_CURRENT_USER\Software\Classes\Directory\Background\shell\DockerCompose\shell\4logs]
+"MUIVerb"="Logs (follow)"
+"Icon"="C:\\Program Files\\PowerShell\\7\\pwsh.exe,0"
+
+[HKEY_CURRENT_USER\Software\Classes\Directory\Background\shell\DockerCompose\shell\4logs\command]
+@="pwsh.exe -NoExit -WorkingDirectory \"%V\\.\" -Command \"docker compose logs -f --tail 100\""
+
+[HKEY_CURRENT_USER\Software\Classes\Directory\Background\shell\DockerCompose\shell\5down]
+"MUIVerb"="Down"
+"Icon"="C:\\Program Files\\PowerShell\\7\\pwsh.exe,0"
+"CommandFlags"=dword:00000020
+
+[HKEY_CURRENT_USER\Software\Classes\Directory\Background\shell\DockerCompose\shell\5down\command]
+@="pwsh.exe -NoExit -WorkingDirectory \"%V\\.\" -Command \"docker compose down\""
+
+; --- Right-click on a folder ---
+[HKEY_CURRENT_USER\Software\Classes\Directory\shell\DockerCompose]
+"MUIVerb"="Docker Compose"
+"Icon"="C:\\Program Files\\Docker\\Docker\\Docker Desktop.exe,0"
+"SubCommands"=""
+
+[HKEY_CURRENT_USER\Software\Classes\Directory\shell\DockerCompose\shell\1up]
+"MUIVerb"="Up -d"
+"Icon"="C:\\Program Files\\PowerShell\\7\\pwsh.exe,0"
+
+[HKEY_CURRENT_USER\Software\Classes\Directory\shell\DockerCompose\shell\1up\command]
+@="pwsh.exe -NoExit -WorkingDirectory \"%V\\.\" -Command \"docker compose up -d\""
+
+[HKEY_CURRENT_USER\Software\Classes\Directory\shell\DockerCompose\shell\2pullup]
+"MUIVerb"="Pull && Up -d"
+"Icon"="C:\\Program Files\\PowerShell\\7\\pwsh.exe,0"
+
+[HKEY_CURRENT_USER\Software\Classes\Directory\shell\DockerCompose\shell\2pullup\command]
+@="pwsh.exe -NoExit -WorkingDirectory \"%V\\.\" -Command \"docker compose pull; docker compose up -d\""
+
+[HKEY_CURRENT_USER\Software\Classes\Directory\shell\DockerCompose\shell\3ps]
+"MUIVerb"="Status (ps)"
+"Icon"="C:\\Program Files\\PowerShell\\7\\pwsh.exe,0"
+
+[HKEY_CURRENT_USER\Software\Classes\Directory\shell\DockerCompose\shell\3ps\command]
+@="pwsh.exe -NoExit -WorkingDirectory \"%V\\.\" -Command \"docker compose ps\""
+
+[HKEY_CURRENT_USER\Software\Classes\Directory\shell\DockerCompose\shell\4logs]
+"MUIVerb"="Logs (follow)"
+"Icon"="C:\\Program Files\\PowerShell\\7\\pwsh.exe,0"
+
+[HKEY_CURRENT_USER\Software\Classes\Directory\shell\DockerCompose\shell\4logs\command]
+@="pwsh.exe -NoExit -WorkingDirectory \"%V\\.\" -Command \"docker compose logs -f --tail 100\""
+
+[HKEY_CURRENT_USER\Software\Classes\Directory\shell\DockerCompose\shell\5down]
+"MUIVerb"="Down"
+"Icon"="C:\\Program Files\\PowerShell\\7\\pwsh.exe,0"
+"CommandFlags"=dword:00000020
+
+[HKEY_CURRENT_USER\Software\Classes\Directory\shell\DockerCompose\shell\5down\command]
+@="pwsh.exe -NoExit -WorkingDirectory \"%V\\.\" -Command \"docker compose down\""

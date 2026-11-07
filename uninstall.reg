@@ -1,0 +1,7 @@
+Windows Registry Editor Version 5.00
+
+; Removes the Docker Compose submenu installed by docker_compose_context.reg (current user).
+
+[-HKEY_CURRENT_USER\Software\Classes\Directory\Background\shell\DockerCompose]
+
+[-HKEY_CURRENT_USER\Software\Classes\Directory\shell\DockerCompose]

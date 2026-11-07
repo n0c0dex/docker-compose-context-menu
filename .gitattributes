@@ -1,0 +1,2 @@
+# regedit expects Windows line endings
+*.reg text eol=crlf

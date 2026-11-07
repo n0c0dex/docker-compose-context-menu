@@ -1,0 +1,10 @@
+Windows Registry Editor Version 5.00
+
+; Removes the ORIGINAL (2025) version of this menu, which was installed machine-wide.
+; Needs administrator rights. Run it once before installing the current version.
+
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Directory\Background\shell\DockerCompose]
+
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CommandStore\shell\DockerUp]
+
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CommandStore\shell\DockerDown]
